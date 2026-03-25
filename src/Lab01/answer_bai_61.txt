@@ -1,0 +1,20 @@
+TRẢ LỜI CÂU HỎI PHẦN 6.1 (CHOOSING OPTION)
+
+Câu 1: Chuyện gì xảy ra nếu người dùng chọn "Cancel"?
+Trả lời:
+- Khi người dùng nhấn nút "Cancel", hàm showConfirmDialog sẽ trả về một giá trị số nguyên tương ứng với hằng số JOptionPane.CANCEL_OPTION (giá trị cụ thể là 2).
+- Trong đoạn mã mẫu: (option == JOptionPane.YES_OPTION ? "Yes" : "No"), vì giá trị trả về (2) không bằng với YES_OPTION (0), nên biểu thức điều kiện sẽ trả về kết quả là "No". Do đó, chương trình sẽ hiển thị thông báo: "You've chosen: No".
+
+Câu 2: Làm thế nào để tùy chỉnh các lựa chọn cho người dùng? (Ví dụ: Chỉ hiện "Yes/No", hoặc thay bằng "I do/I don't")
+Trả lời:
+- Để chỉ hiển thị hai lựa chọn "Yes" và "No" (loại bỏ nút Cancel):
+  Ta thêm tham số JOptionPane.YES_NO_OPTION vào trong hàm showConfirmDialog.
+  Ví dụ: int option = JOptionPane.showConfirmDialog(null, "Nội dung câu hỏi", "Tiêu đề", JOptionPane.YES_NO_OPTION);
+
+- Để tùy chỉnh hoàn toàn tên các nút bấm (Ví dụ: "I do" và "I don't"):
+  Ta sử dụng hàm JOptionPane.showOptionDialog(). Hàm này cho phép truyền vào một mảng các chuỗi (Object array) để định nghĩa nhãn cho từng nút bấm.
+  Ví dụ:
+  Object[] options = {"I do", "I don't"};
+  JOptionPane.showOptionDialog(null, "Nội dung câu hỏi", "Tiêu đề tùy chỉnh",
+      JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+      null, options, options[0]);
