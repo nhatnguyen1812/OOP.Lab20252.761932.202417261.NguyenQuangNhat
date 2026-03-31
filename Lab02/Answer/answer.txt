@@ -1,0 +1,25 @@
+CÂU HỎI 1: 
+Nếu bạn tạo một constructor để khởi tạo DVD bằng "tiêu đề" (title), sau đó tạo một constructor khác để khởi tạo DVD bằng "thể loại" (category), Java có cho phép điều này không?
+TRẢ LỜI:
+Không, Java không cho phép điều này. 
+Java phân biệt các constructor dựa trên "Signature" (chữ ký phương thức - bao gồm số lượng, kiểu dữ liệu và thứ tự của các tham số). Nếu cả "title" và "category" đều có kiểu dữ liệu là String, cả hai constructor sẽ có cùng một signature: Constructor(String). Điều này dẫn đến lỗi biên dịch (compilation error) vì Java không thể xác định được constructor nào cần gọi.
+
+CÂU HỎI 2:
+Java là ngôn ngữ lập trình truyền tham số theo giá trị (Pass-by-Value) hay truyền theo tham chiếu (Pass-by-Reference)?
+TRẢ LỜI:
+Java hoàn toàn là ngôn ngữ truyền tham số theo giá trị (Pass-by-Value).
+Khi bạn truyền một biến vào một phương thức, Java sẽ tạo ra một bản sao của giá trị biến đó:
+- Đối với các kiểu dữ liệu nguyên thủy (primitive types): Nó sao chép giá trị thực tế (ví dụ: số 5, số 10).
+- Đối với các đối tượng (objects): Nó sao chép giá trị của "tham chiếu" (tức là địa chỉ ô nhớ của đối tượng đó). 
+Vì phương thức chỉ nhận được một bản sao, nên mọi việc gán lại tham số bên trong phương thức (trỏ nó sang một đối tượng mới) sẽ không làm ảnh hưởng đến biến gốc ở bên ngoài hàm gọi.
+
+CÂU HỎI 3:
+a) Sau khi gọi hàm swap(jungleDVD, cinderellaDVD), tại sao tiêu đề của hai đối tượng này vẫn giữ nguyên?
+TRẢ LỜI:
+Do cơ chế Pass-by-Value. Trong hàm swap, Java truyền vào bản sao của các tham chiếu (địa chỉ ô nhớ) của jungleDVD và cinderellaDVD. Thao tác hoán đổi (swap) trong hàm thực chất chỉ hoán đổi các bản sao cục bộ này. Các tham chiếu gốc trong hàm main vẫn trỏ đến các đối tượng ban đầu, vì vậy không có sự thay đổi nào xảy ra bên ngoài hàm.
+b) Sau khi gọi hàm changeTitle(jungleDVD, cinderellaDVD.getTitle()), tại sao tiêu đề của JungleDVD lại thay đổi?
+TRẢ LỜI:
+Mặc dù Java truyền tham chiếu theo giá trị (copy địa chỉ), nhưng bản sao của tham chiếu đó vẫn trỏ đến đúng đối tượng thực tế trong bộ nhớ Heap. 
+- Khi gọi `dvd.setTitle(title)`, bạn đang sử dụng tham chiếu đó để truy cập vào đối tượng thật và thay đổi trạng thái bên trong của nó. 
+- Ngay cả khi sau đó bạn gán lại `dvd = new DigitalVideoDisc(...)` bên trong hàm, việc này chỉ làm thay đổi bản sao cục bộ của tham chiếu, còn thay đổi được thực hiện qua `setTitle()` đã tác động trực tiếp vào đối tượng gốc và được duy trì sau khi hàm kết thúc.
+
