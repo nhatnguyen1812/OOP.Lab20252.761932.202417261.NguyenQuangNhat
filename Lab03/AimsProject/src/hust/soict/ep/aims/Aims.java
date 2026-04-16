@@ -1,3 +1,8 @@
+package hust.soict.ep.aims;
+
+import hust.soict.ep.aims.cart.Cart;
+import hust.soict.ep.aims.disc.DigitalVideoDisc;
+
 public class Aims {
     public static void main(String[] args) {
         Cart anOrder = new Cart();
@@ -13,12 +18,12 @@ public class Aims {
                 "Animation", 18.99f);
         anOrder.addDigitalVideoDisc(dvd3);
 
-        System.out.println("Cart before removing item:");
+        System.out.println("hust.soict.ep.aims.cart.Cart before removing item:");
         anOrder.displayCart();
 
         anOrder.removeDigitalVideoDisc(dvd2);
 
-        System.out.println("\nCart after removing item:");
+        System.out.println("\nhust.soict.ep.aims.cart.Cart after removing item:");
         anOrder.displayCart();
     }
 }

@@ -1,0 +1,36 @@
+ANSWERS FOR LAB 03 - BASIC OBJECT-ORIENTED TECHNIQUES
+
+1. Method Overloading 
+Question: Compare an arbitrary number of arguments (varargs) to an array parameter. What do you prefer? 
+Answer: 
+- Varargs (...) cho phép truyền trực tiếp các đối tượng rời rạc (ví dụ: add(d1, d2)) hoặc một mảng, giúp code gọi hàm linh hoạt và gọn gàng hơn.
+- Mảng ([]) bắt buộc người dùng phải khởi tạo mảng trước khi truyền vào. 
+- Ưu tiên: Dùng varargs vì nó bao hàm cả mảng và giúp việc gọi hàm tự nhiên hơn.
+
+2. Parameter Passing 
+Question: Why does the title remain the same after swap() but change after changeTitle()? 
+Answer:
+- Java là ngôn ngữ "Pass-by-value" (truyền tham trị).
+- Trong hàm swap(o1, o2): Java truyền bản sao của các tham chiếu (references). Hàm chỉ tráo đổi 2 bản sao này cục bộ, không ảnh hưởng đến biến gốc ở hàm main.
+- Trong hàm changeTitle(dvd, title): Tham chiếu đến đối tượng dvd được truyền vào. Khi gọi dvd.setTitle(), ta đang tác động trực tiếp lên vùng nhớ chứa đối tượng đó nên tiêu đề bị thay đổi. Lệnh "dvd = new..." sau đó chỉ thay đổi tham chiếu cục bộ nên không ảnh hưởng bên ngoài.
+
+Question: Please write a swap() method that can correctly swap the two objects.
+Answer:
+Do Java truyền tham trị (pass-by-value), ta không thể hoán đổi trực tiếp 2 tham chiếu. Để "swap" 2 đối tượng, ta phải hoán đổi trạng thái (thuộc tính) bên trong của chúng:
+public static void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+    String tmpTitle = dvd1.getTitle();
+    dvd1.setTitle(dvd2.getTitle());
+    dvd2.setTitle(tmpTitle);
+    
+    // Tương tự cho các thuộc tính khác nếu cần tráo đổi toàn diện:
+    // String tmpCategory = dvd1.getCategory();
+    // dvd1.setCategory(dvd2.getCategory());
+    // dvd2.setCategory(tmpCategory);
+    // ...
+}
+
+3. Memory Management 
+Question: Difference between String and StringBuilder/StringBuffer? 
+Answer:
+- String: Là đối tượng bất biến (immutable). Mỗi lần dùng toán tử "+" để nối chuỗi trong vòng lặp, Java tạo ra một đối tượng mới, gây tốn bộ nhớ và chậm chương trình (tạo nhiều "garbage").
+- StringBuilder/StringBuffer: Là đối tượng có thể thay đổi (mutable). Chúng sửa đổi trực tiếp trên bộ đệm hiện có nên tốc độ nhanh hơn hàng nghìn lần và tiết kiệm bộ nhớ khi xử lý chuỗi lớn.

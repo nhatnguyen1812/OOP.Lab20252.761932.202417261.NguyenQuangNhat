@@ -1,3 +1,5 @@
+package hust.soict.ep.aims.disc;
+
 public class DigitalVideoDisc {
     private String title;
     private String category;
@@ -86,5 +88,18 @@ public class DigitalVideoDisc {
 
     public int getId() {
         return id;
+    }
+    public boolean isMatch(String title) {
+        return this.title != null && this.title.equalsIgnoreCase(title);
+    }
+
+
+    @Override
+    public String toString() {
+        return "DVD - " + title + " - " +
+                (category != null ? category : "N/A") + " - " +
+                (director != null ? director : "N/A") + " - " +
+                (length > 0 ? length : "0") + ": " +
+                cost + " $";
     }
 }
