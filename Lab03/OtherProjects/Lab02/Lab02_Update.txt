@@ -1,0 +1,1 @@
+Toàn bộ mã nguồn của Lab02 đã được refactor (tổ chức lại) và nâng cấp lên thư mục AimsProject theo đúng yêu cầu của Lab 03.
