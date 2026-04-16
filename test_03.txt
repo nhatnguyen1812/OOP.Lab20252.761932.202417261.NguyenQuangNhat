@@ -1,0 +1,12 @@
+Lập trình hướng đối tượng (Object-Oriented Programming) là một phương pháp luận lập trình dựa trên khái niệm về "đối tượng", nơi mà dữ liệu và các phương thức xử lý dữ liệu đó được đóng gói lại với nhau. Thay vì tập trung vào các hàm hay logic tuần tự, OOP tập trung vào các thực thể tương tác trong hệ thống.
+
+4 Cột trụ cốt lõi của OOP:
+Tính đóng gói (Encapsulation): Che giấu thông tin chi tiết bên trong và chỉ để lộ ra những gì cần thiết thông qua các phương thức giao tiếp công khai.
+
+Tính kế thừa (Inheritance): Cho phép một lớp mới sở hữu lại các đặc tính và hành vi từ một lớp đã tồn tại, giúp tái sử dụng mã nguồn hiệu quả.
+
+Tính đa hình (Polymorphism): Một đối tượng hoặc phương thức có thể thực hiện theo nhiều cách khác nhau tùy vào ngữ cảnh (ví dụ: nạp chồng hoặc ghi đè phương thức).
+
+Tính trừu tượng (Abstraction): Tập trung vào những đặc điểm chung của đối tượng và loại bỏ những chi tiết rườm rà không cần thiết.
+
+Ghi chú kỹ thuật: Trong OOP, một "Class" đóng vai trò là bản thiết kế (blueprint), còn "Object" là một thực thể cụ thể (instance) được tạo ra từ bản thiết kế đó.
