@@ -1,101 +1,111 @@
 package hust.soict.ep.aims.cart;
 
-import hust.soict.ep.aims.disc.DigitalVideoDisc;
+import hust.soict.ep.aims.media.Media;
+import java.util.ArrayList;
+import java.util.Collections; // Import thêm thư viện này để dùng chức năng Sort
 
 public class Cart {
-    public static final int MAX_NUMBERS_ORDERED = 20;
-    private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
-    private int qtyOrdered = 0;
+    private ArrayList<Media> itemsOrdered = new ArrayList<Media>();
 
-    public void addDigitalVideoDisc(DigitalVideoDisc disc) {
-        if (qtyOrdered < MAX_NUMBERS_ORDERED) {
-            itemsOrdered[qtyOrdered] = disc;
-            qtyOrdered++;
-            System.out.println("Đĩa đã được thêm");
-            if (qtyOrdered == MAX_NUMBERS_ORDERED) {
-                System.out.println("Giỏ hàng gần đầy");
-            }
+    public void addMedia(Media media) {
+        if (!itemsOrdered.contains(media)) {
+            itemsOrdered.add(media);
+            System.out.println("Da them " + media.getTitle() + " vao gio hang.");
         } else {
-            System.out.println("Giỏ hàng đã đầy không thể thêm đĩa");
+            System.out.println(media.getTitle() + " da co trong gio hang!");
         }
     }
 
-
-    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-        addDigitalVideoDisc(dvd1);
-        addDigitalVideoDisc(dvd2);
-    }
-
-    public void addDigitalVideoDisc(DigitalVideoDisc... dvds) {
-        for (DigitalVideoDisc dvd : dvds) {
-            addDigitalVideoDisc(dvd);
-        }
-    }
-    public void print() {
-        System.out.println("***********************CART***********************");
-        System.out.println("Ordered Items:");
-        for (int i = 0; i < qtyOrdered; i++) {
-            System.out.println((i + 1) + ". " + itemsOrdered[i].toString());
-        }
-        System.out.println("Total cost: " + totalCost() + " $");
-        System.out.println("***************************************************");
-    }
-    // Tìm kiếm theo mã số ID
-    public void search(int id) {
-        boolean found = false;
-        for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsOrdered[i].getId() == id) {
-                System.out.println("Tìm thấy: " + itemsOrdered[i].toString());
-                found = true;
-                break;
-            }
-        }
-        if (!found) System.out.println("Không tìm thấy đĩa có ID: " + id);
-    }
-
-    // Tìm kiếm theo tên (Title)
-    public void search(String title) {
-        boolean found = false;
-        for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsOrdered[i].isMatch(title)) {
-                System.out.println("Tìm thấy: " + itemsOrdered[i].toString());
-                found = true;
-            }
-        }
-        if (!found) System.out.println("Không tìm thấy đĩa có tên: " + title);
-    }
-    public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
-        boolean found = false;
-        for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsOrdered[i].equals(disc)) {
-                for (int j = i; j < qtyOrdered - 1; j++) {
-                    itemsOrdered[j] = itemsOrdered[j + 1];
-                }
-                itemsOrdered[qtyOrdered - 1] = null;
-                qtyOrdered--;
-                found = true;
-                System.out.println("Đĩa đã được xóa");
-                break;
-            }
-        }
-        if (!found) {
-            System.out.println("Không tìm thấy đĩa trong giỏ hàng");
+    public void removeMedia(Media media) {
+        if (itemsOrdered.contains(media)) {
+            itemsOrdered.remove(media);
+            System.out.println("Da xoa " + media.getTitle() + " khoi gio hang.");
+        } else {
+            System.out.println("Khong tim thay " + media.getTitle() + " de xoa!");
         }
     }
 
     public float totalCost() {
         float total = 0;
-        for (int i = 0; i < qtyOrdered; i++) {
-            total += itemsOrdered[i].getCost();
+        for (Media media : itemsOrdered) {
+            total += media.getCost();
         }
         return total;
     }
 
-    public void displayCart() {
-        System.out.println("Các mặt hàng trong giỏ hàng:");
-        for (int i = 0; i < qtyOrdered; i++) {
-            System.out.println((i + 1) + " - " + itemsOrdered[i].getTitle() + " - " + itemsOrdered[i].getCost());
+    // Lấy số lượng sản phẩm trong giỏ
+    public int getSize() {
+        return itemsOrdered.size();
+    }
+
+    // In danh sách giỏ hàng
+    public void printCart() {
+        System.out.println("***********************CART***********************");
+        System.out.println("Ordered Items:");
+        if (itemsOrdered.isEmpty()) {
+            System.out.println("Gio hang dang trong!");
+        } else {
+            for (int i = 0; i < itemsOrdered.size(); i++) {
+                System.out.println((i + 1) + ". " + itemsOrdered.get(i).toString());
+            }
         }
-        System.out.println("Tổng chi phí: " + totalCost());
+        System.out.println("Total cost: " + totalCost() + " $");
+        System.out.println("**************************************************");
+    }
+
+    // Tìm kiếm để in ra theo ID
+    public void searchById(int id) {
+        boolean found = false;
+        for (Media media : itemsOrdered) {
+            if (media.getId() == id) {
+                System.out.println("Tim thay: " + media.toString());
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Khong tim thay san pham voi ID: " + id);
+        }
+    }
+
+    // Tìm kiếm để in ra theo Tên
+    public void searchByTitle(String title) {
+        boolean found = false;
+        for (Media media : itemsOrdered) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                System.out.println("Tim thay: " + media.toString());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Khong tim thay san pham voi ten: " + title);
+        }
+    }
+
+    // Tìm kiếm và trả về Object cho Menu xử lý Play hoặc Remove
+    public Media searchByTitleReturn(String title) {
+        for (Media media : itemsOrdered) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
+            }
+        }
+        return null;
+    }
+
+    // Sắp xếp theo Tiêu đề rồi đến Giá
+    public void sortByTitleCost() {
+        Collections.sort(itemsOrdered, Media.COMPARE_BY_TITLE_COST);
+        System.out.println("Da sap xep gio hang theo Tieu de -> Gia.");
+    }
+
+    // Sắp xếp theo Giá rồi đến Tiêu đề
+    public void sortByCostTitle() {
+        Collections.sort(itemsOrdered, Media.COMPARE_BY_COST_TITLE);
+        System.out.println("Da sap xep gio hang theo Gia -> Tieu de.");
+    }
+
+    // Làm trống giỏ hàng sau khi Order
+    public void emptyCart() {
+        itemsOrdered.clear();
     }
 }

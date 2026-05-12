@@ -1,39 +1,49 @@
 package hust.soict.ep.aims.store;
-import hust.soict.ep.aims.disc.DigitalVideoDisc;
+
+import hust.soict.ep.aims.media.Media;
+import java.util.ArrayList;
 
 public class Store {
-    private DigitalVideoDisc itemsInStore[] = new DigitalVideoDisc[100];
-    private int qtyInStore = 0;
+    private ArrayList<Media> itemsInStore = new ArrayList<Media>();
 
-    // Phương thức thêm đĩa vào kho
-    public void addDVD(DigitalVideoDisc dvd) {
-        if (qtyInStore < itemsInStore.length) {
-            itemsInStore[qtyInStore] = dvd;
-            qtyInStore++;
-            System.out.println("Đã thêm đĩa vào kho: " + dvd.getTitle());
+    public void addMedia(Media media) {
+        if (!itemsInStore.contains(media)) {
+            itemsInStore.add(media);
+            System.out.println("Da them " + media.getTitle() + " vao cua hang.");
         } else {
-            System.out.println("Kho đã đầy, không thể thêm đĩa!");
+            System.out.println(media.getTitle() + " da ton tai trong cua hang!");
         }
     }
 
-    // Phương thức xóa đĩa khỏi kho
-    public void removeDVD(DigitalVideoDisc dvd) {
-        boolean found = false;
-        for (int i = 0; i < qtyInStore; i++) {
-            if (itemsInStore[i].equals(dvd)) {
-                // Đẩy các đĩa phía sau lên trước
-                for (int j = i; j < qtyInStore - 1; j++) {
-                    itemsInStore[j] = itemsInStore[j + 1];
-                }
-                itemsInStore[qtyInStore - 1] = null;
-                qtyInStore--;
-                found = true;
-                System.out.println("Đã xóa đĩa khỏi kho: " + dvd.getTitle());
-                break;
+    public void removeMedia(Media media) {
+        if (itemsInStore.contains(media)) {
+            itemsInStore.remove(media);
+            System.out.println("Da xoa " + media.getTitle() + " khoi cua hang.");
+        } else {
+            System.out.println("Khong tim thay " + media.getTitle() + " de xoa!");
+        }
+    }
+
+    // Hàm in danh sách cửa hàng
+    public void printStore() {
+        System.out.println("********************STORE********************");
+        if (itemsInStore.isEmpty()) {
+            System.out.println("Cua hang dang trong!");
+        } else {
+            for (int i = 0; i < itemsInStore.size(); i++) {
+                System.out.println((i + 1) + ". " + itemsInStore.get(i).toString());
             }
         }
-        if (!found) {
-            System.out.println("Không tìm thấy đĩa này trong kho!");
+        System.out.println("*********************************************");
+    }
+
+    // Hàm tìm kiếm Media theo tên và trả về Object để Menu xử lý
+    public Media searchByTitle(String title) {
+        for (Media media : itemsInStore) {
+            if (media.getTitle().equalsIgnoreCase(title)) {
+                return media;
+            }
         }
+        return null;
     }
 }

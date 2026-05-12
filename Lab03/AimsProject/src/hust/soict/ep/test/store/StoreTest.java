@@ -1,5 +1,6 @@
 package hust.soict.ep.test.store;
-import hust.soict.ep.aims.disc.DigitalVideoDisc;
+
+import hust.soict.ep.aims.media.DigitalVideoDisc;
 import hust.soict.ep.aims.store.Store;
 
 public class StoreTest {
@@ -8,9 +9,9 @@ public class StoreTest {
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King");
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars");
 
-        store.addDVD(dvd1);
-        store.addDVD(dvd2);
+        store.addMedia(dvd1);
+        store.addMedia(dvd2);
 
-        store.removeDVD(dvd1);
+        store.removeMedia(dvd1);
     }
 }
