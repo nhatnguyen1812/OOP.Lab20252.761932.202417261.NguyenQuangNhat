@@ -1,0 +1,6 @@
+CÂU HỎI: 
+Nếu bạn tạo một constructor để khởi tạo DVD bằng "tiêu đề" (title), sau đó tạo một constructor khác để khởi tạo DVD bằng "thể loại" (category), Java có cho phép điều này không?
+TRẢ LỜI:
+Không, Java không cho phép điều này. 
+Java phân biệt các constructor dựa trên "Signature" (chữ ký phương thức - bao gồm số lượng, kiểu dữ liệu và thứ tự của các tham số). Nếu cả "title" và "category" đều có kiểu dữ liệu là String, cả hai constructor sẽ có cùng một signature: Constructor(String). Điều này dẫn đến lỗi biên dịch (compilation error) vì Java không thể xác định được constructor nào cần gọi.
+

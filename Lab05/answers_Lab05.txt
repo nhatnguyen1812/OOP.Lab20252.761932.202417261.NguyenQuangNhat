@@ -1,0 +1,43 @@
+ANSWERS FOR LAB 05: GUI PROGRAMMING & EXCEPTION HANDLING
+
+------------------------------------------------------------------------
+Question 1 (Section 1.3, Page 5): Compare Swing and AWT elements
+------------------------------------------------------------------------
+
+1. Top-level containers in Swing and AWT:
+   - Trong AWT: Cac top-level container la Frame, Dialog, Applet. Chung la cac
+     heavyweight component (thanh phan nang), nghia la chung phu thuoc truc tiep
+     va ho tro boi cac cua so giao dien goc (native peers) cua he dieu hanh.
+   - Trong Swing: Cac top-level container la JFrame, JDialog, JApplet. Chung cung
+     la heavyweight nhung chua mot content-pane (thuong la kieu Container).
+     Cac Swing JComponent khac phai duoc add vao content-pane nay chu khong
+     the add truc tiep len JFrame nhu AWT. Vi du:
+     + AWT: add(button);
+     + Swing: getContentPane().add(button);
+
+2. Class name of components:
+   - Giao dien AWT: Ten cac lop giao dien khong co tien to.
+     Vi du: Label, Button, TextField, Panel, Frame.
+   - Giao dien Swing: Ten cac lop giao dien luon bat dau bang chu cai 'J'.
+     Vi du: JLabel, JButton, JTextField, JPanel, JFrame.
+   - Swing JComponents la cac lightweight component (thanh phan nhe), duoc
+     ve bang code Java tren moi truong do hoa cua JVM nen chay muot ma, doc lap
+     nen tang va ho tro look-and-feel tuy bien cao hon AWT.
+
+------------------------------------------------------------------------
+Question 2 (Section 14, Page 33): What happens when you don't update for them to catch?
+------------------------------------------------------------------------
+
+- Trong Java, PlayerException la mot Checked Exception (do ke thua truc tiep
+  tu java.lang.Exception).
+- Khi mot phuong thuc khac goi ham play() (co chu ky khai bao "throws PlayerException"),
+  trinh bien dich Java se bat buoc phuong thuc goi do phai thuc hien mot trong
+  hai viec sau:
+  1. Bat ngoai le do bang khoi lenh try-catch de xu ly chu dong.
+  2. Khai bao tiep "throws PlayerException" o chu ky phuong thuc cua minh de
+     chuyen tiep (delegate) loi cho cap tren xu ly.
+- Neu phuong thuc goi khong thuc hien ca 2 viec tren, trinh bien dich Java se
+  bao loi dong thoi khong cho phep build ung dung (Compile-time Error):
+  "unreported exception PlayerException; must be caught or declared to be thrown".
+- Dieu nay giup chuong trinh tro nen an toan va dam bao cac tinh huong loi luon
+  duoc quan ly mot cach chu dong.
